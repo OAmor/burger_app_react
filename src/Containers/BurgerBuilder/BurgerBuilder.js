@@ -3,6 +3,8 @@ import React , {Component} from 'react';
 import Aux from "../../hoc/Aux";
 import Burger from '../../Components/Burger/Burger';
 import BuildControlls from '../../Components/BuilderControlls/BuilderControlls';
+import Modal from '../../UI/Modal/Modal';
+import Summary from '../../Components/Summary/Summary';
 
 const PRICES = {
     Cheese: 0.5,
@@ -18,7 +20,8 @@ class BurgerBuilder extends Component{
             Meat: 0,
             Salad: 0
         },
-        price :4
+        price :4,
+        purchase: 'none'
     }
 
     AddIngredient = (type) => {
@@ -42,14 +45,26 @@ class BurgerBuilder extends Component{
             ingredients: updatedIng,
             price: this.state.price-PRICES[type]
         });
+    };
+
+    displayPurchase = () => {
+        if(this.state.purchase === 'none'){
+            this.setState({purchase: 'block'})
+        }else{
+            this.setState({purchase: 'none'})
+        }
     }
 
     render(){
         return(
             <Aux>
                 <Burger ingredients={this.state.ingredients}/>
+                <Modal display={this.state.purchase}>
+                    <Summary ingredients={this.state.ingredients}/>
+                </Modal>
                 <BuildControlls
                     price={this.state.price}
+                    order={this.displayPurchase}
                     remove={this.RemoveIngredient}
                     add={this.AddIngredient} />
             </Aux>

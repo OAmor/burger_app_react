@@ -11,11 +11,13 @@ const builderControlls = (props) => {
             <p><strong>{props.price}</strong></p>
             {ctrls.map(ctrl => {
                     return <BuilderControll
+                        key={ctrl}
                         remove={props.remove.bind(this,ctrl)}
                         add={props.add.bind(this,ctrl)}
                         label={ctrl}/>
                 })
             }
+            <button onClick={props.order} className={classes.OrderButton}>Order</button>
         </div>
     );
 };
