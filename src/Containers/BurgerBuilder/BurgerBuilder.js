@@ -5,10 +5,17 @@ import Burger from '../../Components/Burger/Burger';
 
 class BurgerBuilder extends Component{
 
+    state = {
+        ingredients: {
+            Cheese: 0,
+            Meat: 0
+        }
+    }
+
     render(){
         return(
             <Aux>
-                <Burger/>
+                <Burger ingredients={this.state.ingredients}/>
                 <div>Builder Controller</div>
             </Aux>
         )
